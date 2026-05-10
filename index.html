@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#f7f3ea">
+    <title>토목기사 플래시카드</title>
+    <link rel="manifest" href="./manifest.webmanifest">
+    <link rel="stylesheet" href="./styles.css">
+    <script>
+      window.MathJax = {
+        tex: { inlineMath: [["\\(", "\\)"], ["$", "$"]], displayMath: [["\\[", "\\]"]] },
+        svg: { fontCache: "global" },
+        startup: { typeset: false }
+      };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+    <script defer src="./app.js"></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Civil Engineer Review</p>
+          <h1>토목기사 플래시카드</h1>
+        </div>
+        <button class="icon-button" id="installBtn" type="button" title="홈 화면에 추가" hidden>＋</button>
+      </header>
+
+      <main>
+        <section class="study-hero" aria-label="학습 카드">
+          <div class="hero-meta">
+            <span id="activeSubject">전체 과목</span>
+            <strong id="dueCount">오늘 복습 0장</strong>
+          </div>
+
+          <button class="flashcard" id="flashcard" type="button" aria-label="카드 뒤집기">
+            <span class="card-label" id="cardLabel">앞면</span>
+            <span class="card-text" id="cardText">카드를 추가하거나 샘플 카드로 학습을 시작하세요.</span>
+            <span class="card-hint">탭해서 뒤집기</span>
+          </button>
+
+          <div class="study-actions">
+            <button class="secondary" id="againBtn" type="button">다시 보기</button>
+            <button class="primary" id="knowBtn" type="button">알았어</button>
+          </div>
+
+          <div class="progress-wrap" aria-label="오늘 학습 진도">
+            <div class="progress-line">
+              <span>오늘 학습</span>
+              <strong id="todayCount">0장</strong>
+            </div>
+            <div class="meter"><span id="progressBar"></span></div>
+          </div>
+        </section>
+
+        <section class="controls" aria-label="과목 선택과 카드 관리">
+          <div class="subject-tabs" id="subjectTabs"></div>
+          <div class="tool-row">
+            <button class="primary" id="newCardBtn" type="button">카드 추가</button>
+            <button class="secondary" id="editCardBtn" type="button">현재 카드 편집</button>
+            <button class="danger" id="deleteCardBtn" type="button">삭제</button>
+          </div>
+        </section>
+
+        <section class="editor-panel" id="editorPanel" aria-label="카드 입력" hidden>
+          <div class="panel-title">
+            <h2 id="editorTitle">새 카드</h2>
+            <button class="icon-button" id="closeEditorBtn" type="button" title="닫기">×</button>
+          </div>
+
+          <label>
+            과목
+            <select id="subjectInput"></select>
+          </label>
+
+          <label>
+            앞면: 개념/공식 이름
+            <input id="frontInput" type="text" placeholder="예: 비에너지 공식">
+          </label>
+
+          <label>
+            뒷면: 공식/내용
+            <textarea id="backInput" rows="6" placeholder="예: \\[ E = h + \\alpha \\frac{Q^2}{2 g A^2} \\]"></textarea>
+          </label>
+
+          <div class="formula-tools" aria-label="수식 입력 도구">
+            <button type="button" data-insert="\\frac{분자}{분모}">분수</button>
+            <button type="button" data-insert="x^{2}">제곱</button>
+            <button type="button" data-insert="x_{i}">아래첨자</button>
+            <button type="button" data-insert="\\sqrt{x}">루트</button>
+            <button type="button" data-insert="\\alpha">α</button>
+            <button type="button" data-insert="\\beta">β</button>
+            <button type="button" data-insert="\\gamma">γ</button>
+            <button type="button" data-insert="\\theta">θ</button>
+            <button type="button" data-insert="\\rho">ρ</button>
+            <button type="button" data-insert="\\sigma">σ</button>
+            <button type="button" data-insert="\\sum_{i=1}^{n}">Σ</button>
+            <button type="button" data-insert="\\left( x \\right)">괄호</button>
+          </div>
+
+          <div class="preview">
+            <span>미리보기</span>
+            <div id="formulaPreview"></div>
+          </div>
+
+          <div class="tool-row">
+            <button class="primary" id="saveCardBtn" type="button">저장</button>
+            <button class="secondary" id="seedBtn" type="button">샘플 카드 불러오기</button>
+          </div>
+        </section>
+
+        <section class="list-panel" aria-label="카드 목록">
+          <div class="panel-title">
+            <h2>카드 목록</h2>
+            <span id="cardTotal">0장</span>
+          </div>
+          <div class="card-list" id="cardList"></div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
